@@ -1,57 +1,57 @@
 // JavaScript Document
-$(document).ready(function(e) {
+$(document).ready(function (e){
     //watchID se refiere a actual
 	
-	var watchID=null;
-	document.addEventListener("deviceready",Dispositivo_Listo,false);
+var watchID=null;
+document.addEventListener("deviceready",Dispositivo_Listo,false);
 	
 	//Cuando esta listo el dispositivo
-	function Dispositivo_Listo(){
-		Comienza();
+function Dispositivo_Listo(){
+Comienza();
 	}
 	
 	//Empiza la observacion de la aceleracion
-	function Comienza(){
+function Comienza(){
 		
 		//Actualiza la aceleracion cada dos segundos
 		//
-		var opciones={frequency:2000};
+var opciones={frequency:2000};
 		
-		watchID=navigator.accelerometer.watchAcceleration(Correcto,Error,opciones);
-		navigator.geolocation.getCurrentPosition(Localiza,ErrorLocalizacion);
+watchID=navigator.accelerometer.watchAcceleration(Correcto, Error,opciones);
+navigator.geolocation.getCurrentPosition(Localiza,ErrorLocalizacion);
 	}
 	//Detiene la observacion de la aceleracion 
 	
-	function Detente(){
-		if(watchID){
-		navigator  .accelerometer.clearWatch (WatchID);
-		watchID=null;
+function Detente(){
+if(watchID){
+navigator .accelerometer.clearWatch (WatchID);
+watchID=null;
 		}
 	}
 	//Correcto:Toma una captura de la aceleracion
-	function Correcto(acceleration){
-		var element=document.getElementById('acelerometro');
+function Correcto(acceleration){
+var element=document.getElementById('acelerometro');
 		
-		element.innerHTML='Aceleracion en X:'+acceleration.x+'<br/>'+
-		'Aceleracion en Y:'+acceleration.y+'<br/>'+
-		'Intervalo:'+acceleration.timestamp+'<br/>';
+element.innerHTML='Aceleracion en X:'+acceleration.x+'<br/>'+
+'Aceleracion en Y:'+acceleration.y+'<br/>'+
+'Intervalo:'+acceleration.timestamp+'<br/>';
 	}
 	
 	//eRROR:FALLA aL obtener la aceleracion
-	function Error(){
-		alert('Error!');
+function Error(){
+alert('Error!');
 	}
 	//Exito al localizar
-	function Localiza(posicion){
-		var element=document.getElementById('geolocalizacion');
-		element.innerHTML='Latitud:'+posicion.coords.latitude+'<br/>'+
-		'Longitud:'+posicion.coords.longitude+'<br/>'+
-		'Precision:'+posicion.coords.accuracy+'<br/>'+
-		'Intervalo:'+posicion.timestamp+'<br/>';
+function Localiza(posicion){
+var element=document.getElementById('geolocalizacion');
+element.innerHTML='Latitud:'+posicion.coords.latitude+'<br/>'+
+'Longitud:'+posicion.coords.longitude+'<br/>'+
+'Precision:'+posicion.coords.accuracy+'<br/>'+
+'Intervalo:'+posicion.timestamp+'<br/>';
 	}
 	//Error en la geolocalizacion
-	function ErrorLocalizacion(error){
-		alert('codigo:'+error.code+'\n'+
-		'mensaje:'+error.message+'\n');
+function ErrorLocalizacion(error){
+alert('codigo:'+error.code+'\n'+
+'mensaje:'+error.message+'\n');
 		}
 });//document ready
